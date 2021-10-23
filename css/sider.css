@@ -1,0 +1,7 @@
+.grid__block--side {
+    grid-area: side;
+}
+
+.grid__block--side p{
+    margin: 18px 16px;
+}

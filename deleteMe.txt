@@ -1,0 +1,6 @@
+Puntos a revisar:
+- clases de CSS (voy a utilizar BEM)
+- etiquetas semánticas de HTML5:
+    - colgroup
+    - main vs body
+ 

@@ -1,0 +1,49 @@
+.grid__block--results {
+    grid-area: results;
+}
+
+.grid__block__table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.grid__block__table th {
+    text-transform: uppercase;
+    font-size: 12px !important;
+    height: 40px;
+    background: #000000 0% 0% no-repeat padding-box;
+}
+
+.grid__block__table__header th:nth-child(3) {    
+    width: 85%;
+    text-align: left;
+    padding: 0 16px;
+}
+
+.grid__block__table__row td {
+    height: 41px;
+    text-align: center;
+    border-bottom: solid 1px #000000;    
+    background-color: #191919;
+}
+
+.grid__block__table__row td:nth-child(3) {
+    text-align: left;
+    padding: 0 10px;
+}
+
+.grid__block__table__separator{
+    height: inherit;
+    width: 1px;
+    vertical-align: middle;
+}
+
+.grid__block__table__separator line{
+    stroke: #000000; 
+    stroke-width: 100%;
+}
+
+.grid__block__table__row--blank td{    
+    background-color: transparent;
+}
