@@ -11,68 +11,68 @@
     </head>
     <body> 
         <main class="grid">
-                <header class="grid__header">
-                    <h1 class="grid__header__title">Lotto & Bitcoin</h1>
-                    <div class="grid__header__sticker">
-                        <svg>     
-                            <defs>
-                                <path id="sticker-path" fill="#FC6200" d="M10,0 L80,70"/>
-                            </defs>
-                            <path fill="#FC6200" d="M0,0 L80,80 l35,0 L0,-35"/>
-                            <text stroke="white" fill="white" font-size="45">
-                                <textPath xlink:href="#sticker-path" text-anchor="middle" startOffset="50%">
-                                    NEW
-                                </textPath>
-                            </text>                   
-                        </svg>
-                    </div>
-                </header> 
-                <aside class="grid__block grid__block--side">
-                    <h2>The Irish Lotto</h2>
-                    <p>Since 16th April 1988, the Irish Lotto draw takes place every Saturday at 8pm. On 30th May 1990 an additional Wednesday evening draw was introduced.</p> 
-                    <p>What would EUR 100 in winnings invested on a draw date be worth in Euro now?</p>
-                    <p>Enter a date and time in the form to get the next draw date and time, with the current value of your investment.</p>
-                </aside> 
-                <div class="grid__block grid__block--datetime-entry">
-                    <h2>Enter a Date and Time</h2>
-                    <form class="grid__block__form">
-                        <input class="grid__block__form__picker" name="date" type="datetime-local" autofocus>
-                        <input class="grid__block__form__button" type="button" value="SUBMIT">
-                    </form>
-                </div>    
-                <div class="grid__block grid__block--results">
-                    <table class="grid__block__table">
-                        <tr class="grid__block__table__header">
-                            <th>Draw Date/Time</th>
-                            <th></th>
-                            <th>Your Bitcoin's value</th>
-                        </tr>
-                        <tr class="grid__block__table__row grid__block__table__row--blank">
-                            <!--
-                            <td>
-                                02-04-2019 20:00
-                            </td>
-                            <td>
-                                <svg class="grid__block__table__separator">
-                                    <line x1="0" y1="11" x2="0" y2="30"></line>
-                                </svg>
-                            </td>
-                            <td>
-                                &euro;0.00
-                            </td>
-                            -->
-                            <td>
-                            </td>
-                            <td>
-                                <svg class="grid__block__table__separator">
-                                    <line x1="0" y1="11" x2="0" y2="30"></line>
-                                </svg>
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
-                    </table>
-                </div> 
+            <header class="grid__header">
+                <h1 class="grid__header__title">Lotto & Bitcoin</h1>
+                <div class="grid__header__sticker">
+                    <svg>     
+                        <defs>
+                            <path id="sticker-path" fill="#FC6200" d="M10,0 L80,70"/>
+                        </defs>
+                        <path fill="#FC6200" d="M0,0 L80,80 l35,0 L0,-35"/>
+                        <text stroke="white" fill="white" font-size="45">
+                            <textPath xlink:href="#sticker-path" text-anchor="middle" startOffset="50%">
+                                NEW
+                            </textPath>
+                        </text>                   
+                    </svg>
+                </div>
+            </header> 
+            <aside class="grid__block grid__block--side">
+                <h2>The Irish Lotto</h2>
+                <p>Since 16<sup>th</sup> April 1988, the Irish Lotto draw takes place every Saturday at 8pm. On 30<sup>th</sup> May 1990 an additional Wednesday evening draw was introduced.</p> 
+                <p>What would EUR 100 in winnings invested on a draw date be worth in Euro now?</p>
+                <p>Enter a date and time in the form to get the next draw date and time, with the current value of your investment.</p>
+            </aside> 
+            <div class="grid__block grid__block--datetime-entry">
+                <h2>Enter a Date and Time</h2>
+                <form class="grid__block__form">
+                    <input class="grid__block__form__picker" name="date" onfocus="this.type='datetime-local'" onblur="if( !this.value ) this.type='text'">
+                    <input class="grid__block__form__button" type="button" value="SUBMIT">
+                </form>
+            </div>    
+            <div class="grid__block grid__block--results">
+                <table class="grid__block__table">
+                    <tr class="grid__block__table__header">
+                        <th>Draw Date/Time</th>
+                        <th></th>
+                        <th>Your Bitcoin's value</th>
+                    </tr>
+                    <tr class="grid__block__table__row grid__block__table__row--blank">
+                        <!--
+                        <td>
+                            02-04-2019 20:00
+                        </td>
+                        <td>
+                            <svg class="grid__block__table__separator">
+                                <line x1="0" y1="11" x2="0" y2="30"></line>
+                            </svg>
+                        </td>
+                        <td>
+                            &euro;0.00
+                        </td>
+                        -->
+                        <td>
+                        </td>
+                        <td>
+                            <svg class="grid__block__table__separator">
+                                <line x1="0" y1="11" x2="0" y2="30"></line>
+                            </svg>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+            </div> 
         </main>
     </body>
 </html>
