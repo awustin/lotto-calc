@@ -1,3 +1,6 @@
+TODOS:
+- fluid y responsiveness
+
 Puntos a revisar:
 - clases de CSS (voy a utilizar BEM)
 - etiquetas semánticas de HTML5:

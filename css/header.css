@@ -9,23 +9,6 @@
     margin: auto 30px;
 }
 
-.grid__header__sticker {
-    top: 40px;
-    left: 1160px;
+.grid__header__sticker svg {
     width: 80px;
-    height: 80px;
-    background: #FC6200 0% 0% no-repeat padding-box;
-    opacity: 1;
-}
-
-.grid__header__sticker p {
-    top: 54px;
-    left: 1191px;
-    width: 35px;
-    height: 35px;
-    transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
-    text-align: left;
-    font: normal normal 900 15px/18px Roboto;
-    letter-spacing: 0px;
-    
 }

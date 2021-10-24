@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
     <head>
-        <title>Lotto Calculator</title>
+        <meta charset="UTF-8">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
@@ -11,13 +11,24 @@
         <link href="./css/sider.css" rel="stylesheet">
         <link href="./css/form.css" rel="stylesheet">
         <link href="./css/table.css" rel="stylesheet">
+        <title>Lotto Calculator</title>
     </head>
     <body> 
         <main class="grid">
                 <header class="grid__header">
                     <h1 class="grid__header__title">Lotto & Bitcoin</h1>
                     <div class="grid__header__sticker">
-                        <p>NEW</p>
+                        <svg>     
+                            <defs>
+                                <path id="sticker-path" fill="#FC6200" d="M10,0 L80,70"/>
+                            </defs>
+                            <path fill="#FC6200" d="M0,0 L80,80 l35,0 L0,-35"/>
+                            <text stroke="white" fill="white" font-size="45">
+                                <textPath xlink:href="#sticker-path" text-anchor="middle" startOffset="50%">
+                                    NEW
+                                </textPath>
+                            </text>                   
+                        </svg>
                     </div>
                 </header> 
                 <aside class="grid__block grid__block--side">
@@ -69,42 +80,3 @@
         </main>
     </body>
 </html>
-
-<!--
-    Mock-up:
-
-    4 Blocks -> header, sider, table, form
-
-    header:
-        - fnt1
-        - bg1
-        - Additional: NEW tag
-    sider:
-        title:
-            - fnt2 
-            - bg1
-        body:
-            - fnt3 
-            - bg2 
-    table:
-        headers:
-            - fnt4
-            - bg1
-        rows:
-            - fnt5
-            - bg3
-        body:
-            - bg2
-    form:
-        title:
-            - fnt2
-            - bg1
-        body:
-            - bg2
-        input:
-            - fnt6
-        button:
-            - fnt2
-            - bg4
-
--->
