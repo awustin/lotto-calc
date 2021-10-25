@@ -7,6 +7,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
         <link href="./css/styles.css" rel="stylesheet">
+        <script src="./js/app.js" defer></script>
         <title>Lotto Calculator</title>
     </head>
     <body> 
@@ -36,8 +37,8 @@
             <div class="grid__block grid__block--datetime-entry">
                 <h2>Enter a Date and Time</h2>
                 <form class="grid__block__form">
-                    <input class="grid__block__form__picker" name="date" onfocus="this.type='datetime-local'" onblur="if( !this.value ) this.type='text'">
-                    <input class="grid__block__form__button" type="button" value="SUBMIT">
+                    <input class="grid__block__form__picker" name="inDate" onfocus="this.type='datetime-local'" onblur="if( !this.value ) this.type='text'">
+                    <input class="grid__block__form__button" id="submitButton" type="submit" value="SUBMIT">
                 </form>
             </div>    
             <div class="grid__block grid__block--results">

@@ -1,0 +1,240 @@
+:root {
+    --layout-w: 1280px;
+    --layout-h: 800px;
+    --font-default: "Roboto", Arial, Helvetica, sans-serif;
+    --text-default: 14px;
+    --text-h1: 24px;
+    --text-h2: 16px;
+    --text-input: 16px;
+    --text-th: 12px;
+    --theme-default: #4A4A4A;
+    --theme-block: #272727;
+    --theme-row: #191919;
+    --theme-black: #000;
+    --theme-white: #FFF;
+    --theme-primary: #FA6200;
+}
+
+/* ----- Layout ----- */
+
+* {
+    font-family: var(--font-default);
+    font-weight: 400;
+    font-size: var(--text-default);
+    color: var(--theme-white);
+}
+
+h1 {
+    font-size: var(--text-h1);
+}
+
+h2 {
+    font-size: var(--text-h2);
+}
+
+sup {
+    font-size: calc(var(--text-default) * 0.6);
+}
+
+body {
+    background: var(--theme-default);
+    align-content: center;
+}
+
+.grid {
+    display: grid;
+    justify-content: center;
+    margin: 40px auto 0px;
+    width: var(--layout-w);
+    max-width: 100%;
+    height: var(--layout-h);
+    max-height: 100%;
+    grid-template-columns: minmax(20%, 300px) minmax(70%, 900px);
+    grid-template-rows: 100px 174px minmax(min-content, 246px);
+    grid-template-areas: 
+        "header header header"
+        "side form form"
+        "side results results";
+}
+
+.grid__block {
+    background: var(--theme-block);
+    margin: 10px 5px 0px;
+}
+
+.grid__block h2 {
+    background: var(--theme-black);
+    margin: auto;
+    padding: 11px 16px 10px;
+    font-size: var(--text-h2);
+}
+
+/* ----- Header ----- */
+
+.grid__header {
+    grid-area: header;
+    background: var(--theme-black);
+    display: flex;
+}
+
+.grid__header__title {
+    flex: auto;
+    margin: auto 30px;
+}
+
+.grid__header__sticker svg {
+    width: 80px;
+}
+
+/* ----- Sider ----- */
+
+.grid__block--side {
+    grid-area: side;
+}
+
+.grid__block--side p{
+    margin: 18px 16px;
+}
+
+/* ----- Form ----- */
+
+.grid__block--datetime-entry {
+    grid-area: form;
+}
+
+.grid__block__form {
+    display: flex;  
+    height: 36px;
+    margin: 37px 16px;    
+}
+
+.grid__block__form__picker {
+    width: 260px;
+    background: var(--theme-white);
+    box-shadow: 0px 2px 4px #00000059;
+    border: 1px solid #C8D6D9;
+}
+
+input[type="datetime-local" i] {
+    font-size: var(--text-input);
+    color: #111111;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.grid__block__form__button {
+    width: 140px;
+    margin-left: 20px;
+    background: var(--theme-primary);
+    box-shadow: 0px 2px 4px #00000059;
+    border: 1px solid var(--theme-primary);
+    opacity: 1;
+}
+
+/* ----- Table ----- */
+
+.grid__block--results {
+    grid-area: results;
+}
+
+.grid__block__table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.grid__block__table th {
+    height: 40px;
+    background: var(--theme-black);
+    font-size: var(--text-th) !important;
+    text-transform: uppercase;
+}
+
+.grid__block__table__header th:nth-child(3) {    
+    width: 85%;
+    text-align: left;
+    padding: 0 16px;
+}
+
+.grid__block__table__row td {
+    height: 41px;
+    text-align: center;
+    border-bottom: solid 1px var(--theme-black);    
+    background-color: var(--theme-row);
+}
+
+.grid__block__table__row td:nth-child(3) {
+    text-align: left;
+    padding: 0 10px;
+}
+
+.grid__block__table__separator{
+    height: inherit;
+    width: 1px;
+    vertical-align: middle;
+}
+
+.grid__block__table__separator line{
+    stroke: var(--theme-black); 
+    stroke-width: 100%;
+}
+
+.grid__block__table__row--blank td{    
+    background: transparent;
+}
+
+
+/* --- 600px Layout --- */
+
+@media only screen and (max-width: 600px) {
+    body {
+        margin: 0;
+    }
+
+    .grid {
+        display: grid;
+        justify-content: center;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        grid-template-columns: minmax(400px, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        grid-template-areas: 
+            "header"
+            "side"
+            "form"
+            "results";
+        row-gap: 5px;
+    }
+
+    .grid__block {
+        margin: 0;
+    }
+
+    /* --- Form --- */
+
+    .grid__block__form {        
+        align-items: center;
+        margin: 5% 5%;
+        height: 100%;
+        flex-direction: column;
+    }
+    
+    .grid__block__form__picker {
+        height: 36px;
+        width: 100%;
+        margin-block: 15px;
+    }
+
+    .grid__block__form__button {
+        margin: 0;
+        height: 36px;
+        width: 100%;
+    }
+
+    input[type="datetime-local" i] {
+        padding-left: 0;
+        width: 100%;
+    }
+    
+}

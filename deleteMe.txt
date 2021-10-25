@@ -1,9 +1,14 @@
 TODOS:
 - fluid y responsiveness
+- hover state
 
 Puntos a revisar:
 - clases de CSS (voy a utilizar BEM)
 - etiquetas semánticas de HTML5:
     - colgroup
     - main vs body
+- organizacion y opt de CSS
+- cargar script con defer
  
+JS
+-Input date can be in future or past
