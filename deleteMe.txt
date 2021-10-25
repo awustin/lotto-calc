@@ -1,6 +1,9 @@
 TODOS:
 - fluid y responsiveness
 - hover state
+- animation
+- disable button in loading
+- warning msge
 
 Puntos a revisar:
 - clases de CSS (voy a utilizar BEM)

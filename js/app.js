@@ -1,32 +1,104 @@
+(function() {    
+    let initialState = true;
+    const api = bitcoinAPI();
+    const utils = formatUtils();
+ 
+    document.addEventListener('submit', (event) => {
+        event.preventDefault();
+        handleSubmit(event.target[0].value);
+    });
+
+    const addDateWithBTCValue = (date, btcValue) => {
+        const tr = document.getElementsByClassName('grid__block__table__row')[0].cloneNode(true);
+        tr.children[0].textContent = date;
+        tr.children[2].textContent = utils.formatEuroCurrency(btcValue);
+        
+        if( initialState ) {
+            tr.classList.remove('grid__block__table__row--blank');
+            document.getElementsByClassName('grid__block__table__row grid__block__table__row--blank')[0].remove();
+            initialState = false;
+        }
+
+        document.getElementsByClassName('grid__block__table')[0].append(tr);
+    };
+
+    const showNoInformationWarning = () => {
+        const warning = 'There is no information for this date.';
+        const messageNodes = document.getElementsByClassName('grid__block__warning');
+        if( messageNodes.length === 0 ) {
+            const div = document.getElementsByClassName('grid__block--datetime-entry')[0];
+            const msg = document.createElement('div');
+            msg.classList.add('grid__block__warning');
+            msg.textContent = warning
+            div.append(msg);
+        }
+        else {
+            messageNodes[0].textContent = warning;
+        }
+    };
+
+    const cleanWarnings = () => {
+        const messageNodes = document.getElementsByClassName('grid__block__warning');
+        if( messageNodes.length !== 0 ) {
+            messageNodes[0].remove();
+        }
+    };
+
+    const handleSubmit = (inDate) => {
+        const b = document.getElementById('submitButton');
+        b.setAttribute('disabled','');
+        cleanWarnings();
+
+        let nextLottoDraw = getNextLottoDraw(inDate);
+        if( !nextLottoDraw ) {
+            showNoInformationWarning();
+            b.removeAttribute('disabled');
+            return
+        }
+        nextLottoDraw = utils.formatStringDate(nextLottoDraw);
+
+        Promise.all([
+            api.getCurrentPrice(),
+            api.getHistoricalPrice(nextLottoDraw.slice(0, 10))
+        ]).then( results => {
+            const todayPrice = results[0].market_data.current_price.eur;
+            const historicPrice = results[1].market_data.current_price.eur;
+            addDateWithBTCValue( nextLottoDraw, ( todayPrice / historicPrice ) * 100 );
+            b.removeAttribute('disabled');
+        }).catch( msg => {
+            showNoInformationWarning();
+            b.removeAttribute('disabled');
+        });
+    };
+})();
+
 /**
 * Determines the next Lotto draw for a given date between April 16, 1988 and today.
 * @param {Date} inDate
 */
 function getNextLottoDraw(inDate) {
-    inDate = (inDate) ? new Date(inDate) : new Date();
-    let minDate = new Date('April 16, 1988 20:00:00'); // Irish Lotto begins
-    let maxDate = new Date();
-    //const toIETimezone = date => date.toLocaleString("en-US", {timeZone: 'Europe/Dublin'});
+    const selectedDate = ( inDate ) ? new Date(inDate) : new Date();
+    const maxDate = new Date();
 
-    if( inDate < minDate || inDate >= maxDate ) {
+    if( selectedDate >= maxDate ) {
         return false;
     }
     
-    let firstLottoDay = ( 3 * 24 + 20 ) * 60; // Wed 20hs of every week, in minutes
-    let secondLottoDay = ( 6 * 24 + 20 ) * 60; // Sat 20hs of every week, in minutes
-    let currentWeekDay = ( inDate.getDay() * 24 + inDate.getHours() ) * 60 + inDate.getMinutes(); // Input in minutes
-    let nextLottoDraw = new Date(inDate);
+    const firstLottoDay = ( 3 * 24 + 20 ) * 60; // Wed 20hs of every week, in minutes
+    const secondLottoDay = ( 6 * 24 + 20 ) * 60; // Sat 20hs of every week, in minutes
+    const selectedWeekDay = ( selectedDate.getDay() * 24 + selectedDate.getHours() ) * 60 + selectedDate.getMinutes(); // Input in minutes
+    const nextLottoDraw = new Date(selectedDate);
 
     nextLottoDraw.setHours(20,0,0,0);
-    if( currentWeekDay < firstLottoDay ) {
+    if( selectedWeekDay < firstLottoDay ) {
         // Before Wed 20hs
-        nextLottoDraw.setDate( nextLottoDraw.getDate() + 3 - inDate.getDay() );
-    } else if( currentWeekDay >= secondLottoDay ) {
+        nextLottoDraw.setDate( nextLottoDraw.getDate() + 3 - selectedDate.getDay() );
+    } else if( selectedWeekDay >= secondLottoDay ) {
         // After Sat 20hs
-        nextLottoDraw.setDate( nextLottoDraw.getDate() + ( 7 - inDate.getDay() ) + 3 );
+        nextLottoDraw.setDate( nextLottoDraw.getDate() + ( 7 - selectedDate.getDay() ) + 3 );
     } else {
         // Between Wed 20hs and Sat 20hs
-        nextLottoDraw.setDate( nextLottoDraw.getDate() + 6 - inDate.getDay() );
+        nextLottoDraw.setDate( nextLottoDraw.getDate() + 6 - selectedDate.getDay() );
     }
 
     if( nextLottoDraw > maxDate ) {
@@ -36,30 +108,51 @@ function getNextLottoDraw(inDate) {
     return nextLottoDraw;
 }
 
-(function() {
-    const dateBTCList = [];
+function bitcoinAPI() {
+    const baseURL = 'https://api.coingecko.com/api/v3/coins/bitcoin';
+    const historicalPriceURL = param => `${baseURL}/history?date=${param}`;
+    const currentPriceURL = () => baseURL;
 
-    const submitHandler = (inDate) => {
+    const getHistoricalPrice = param => 
+        new Promise( (resolve, reject) => {
+            fetch( historicalPriceURL(param) ).then( response => {
+                resolve( response.json() );
+            }).catch( error => reject( error ) )
+        });
 
-        //disable button
+    const getCurrentPrice = () => 
+        new Promise( (resolve, reject) => {
+            fetch( currentPriceURL() ).then( response => {
+                resolve( response.json() );
+            }).catch( error => reject( error ) )
+        });
 
-        let nextLottoDraw = getNextLottoDraw(inDate);
-        
-        if( !nextLottoDraw ) {
-            // Inform in the view
-            // 'There is no information for the selected date.'
-        }
-
-        //HTTP req to get BTC value
-        //add date,value pair to list
-        //render in the DOM
-
-        //enable button
-    };
-
-    // Register events    
-    document.addEventListener('submit', (event) => {
-        event.preventDefault();
-        submitHandler(event.target[0].value);
+    return({
+        getHistoricalPrice,
+        getCurrentPrice
     });
-})();
+}
+
+function formatUtils() {
+    const euroF = new Intl.NumberFormat('en-IE', {
+        style: 'currency',
+        currency: 'EUR',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+
+    const formatEuroCurrency = (numValue) => euroF.format(numValue);
+
+    const formatStringDate = (date) => {
+        let d = date.getDate();
+        let m = date.getMonth() + 1;
+        let y = date.getFullYear();
+        let time = date.toLocaleTimeString('en-IE').slice(0,5);
+        return `${(d <= 9) ? '0' + d : d}-${(m <= 9) ? '0' + m : m}-${y} ${time}`
+    }
+
+    return {
+        formatStringDate,
+        formatEuroCurrency
+    };
+}
