@@ -1,17 +1,7 @@
 TODOS:
-- fluid y responsiveness
+- fluid y responsiveness [OK]
 - hover state
 - animation
-- disable button in loading
+- disable button in loading [OK]
 - warning msge
-
-Puntos a revisar:
-- clases de CSS (voy a utilizar BEM)
-- etiquetas semánticas de HTML5:
-    - colgroup
-    - main vs body
-- organizacion y opt de CSS
-- cargar script con defer
- 
-JS
--Input date can be in future or past
+- fecha predeterminada -> ahora

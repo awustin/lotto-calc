@@ -3,12 +3,12 @@
     const api = bitcoinAPI();
     const utils = formatUtils();
  
-    document.addEventListener('submit', (event) => {
+    document.addEventListener('submit', ( event ) => {
         event.preventDefault();
         handleSubmit(event.target[0].value);
     });
 
-    const addDateWithBTCValue = (date, btcValue) => {
+    const addDateWithBTCValue = ( date, btcValue ) => {
         const tr = document.getElementsByClassName('grid__block__table__row')[0].cloneNode(true);
         tr.children[0].textContent = date;
         tr.children[2].textContent = utils.formatEuroCurrency(btcValue);
@@ -44,7 +44,7 @@
         }
     };
 
-    const handleSubmit = (inDate) => {
+    const handleSubmit = ( inDate ) => {
         const b = document.getElementById('submitButton');
         b.setAttribute('disabled','');
         cleanWarnings();
@@ -73,10 +73,10 @@
 })();
 
 /**
-* Determines the next Lotto draw for a given date between April 16, 1988 and today.
+* Determines the next Lotto draw for a given date.
 * @param {Date} inDate
 */
-function getNextLottoDraw(inDate) {
+function getNextLottoDraw( inDate ) {
     const selectedDate = ( inDate ) ? new Date(inDate) : new Date();
     const maxDate = new Date();
 

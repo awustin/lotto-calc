@@ -14,6 +14,8 @@
     --theme-white: #FFF;
     --theme-primary: #FA6200;
     --theme-disabled: #cecece;
+    --theme-hover: #ff9650;
+    --theme-active: #ff4800;
 }
 
 /* ----- Layout ----- */
@@ -63,6 +65,7 @@ body {
     overflow-y: auto;
     background: var(--theme-block);
     margin: 10px 5px 0px;
+    transition: all 0.5s cubic-bezier(1, 0, 0, 1);
 }
 
 .grid__block h2 {
@@ -132,12 +135,26 @@ input[type="datetime-local" i] {
     box-shadow: 0px 2px 4px #00000059;
     border: 1px solid var(--theme-primary);
     opacity: 1;
+    transition: all 0.1s ease-in;
 }
 
-.grid__block__form__button:disabled {
+.grid__block__form__button:disabled,
+.grid__block__form__button:hover:disabled {
     background: var(--theme-disabled);
     border: 1px solid var(--theme-disabled);
     box-shadow: 0px 2px 4px #00000059;
+}
+
+.grid__block__form__button:hover {
+    cursor: pointer;
+    background: var(--theme-hover);
+    border: 1px solid var(--theme-hover);
+}
+
+.grid__block__form__button:active {
+    cursor: pointer;
+    background: var(--theme-active);
+    border: 1px solid var(--theme-active);
 }
 
 /* ----- Table ----- */
@@ -168,6 +185,10 @@ input[type="datetime-local" i] {
     width: 130px;
 }
 
+.grid__block__table__row {
+    animation: grow-top ease 0.5s forwards;
+}
+
 .grid__block__table__row td {
     height: 41px;
     text-align: center;
@@ -180,7 +201,7 @@ input[type="datetime-local" i] {
     padding: 0 10px;
 }
 
-.grid__block__table__separator{
+.grid__block__table__separator {
     height: inherit;
     width: 1px;
     vertical-align: middle;
@@ -193,6 +214,27 @@ input[type="datetime-local" i] {
 
 .grid__block__table__row--blank td{    
     background: transparent;
+}
+
+/* --- Animations --- */
+
+@keyframes grow-top {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%) scaleY(0);
+    }
+    30%, 50%, 100% {
+        opacity: 1;
+        transform: translateY(0) scaleY(1);
+    }
+    40% {
+        opacity: 1;
+        transform: translateY(-15%) scaleY(0.85);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(-5%) scaleY(0.95);
+    }
 }
 
 
