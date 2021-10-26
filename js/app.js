@@ -5,9 +5,7 @@
 
     window.addEventListener('load', () => {
         const def = utils.formatInputDate(new Date());
-        console.log(def);
         document.getElementById('dateInput').value = def;
-        console.log(document.getElementById('dateInput').value);
       });
  
     document.addEventListener('submit', ( event ) => {
