@@ -2,6 +2,13 @@
     let initialState = true;
     const api = bitcoinAPI();
     const utils = formatUtils();
+
+    window.addEventListener('load', () => {
+        const def = utils.formatInputDate(new Date());
+        console.log(def);
+        document.getElementById('dateInput').value = def;
+        console.log(document.getElementById('dateInput').value);
+      });
  
     document.addEventListener('submit', ( event ) => {
         event.preventDefault();
@@ -9,17 +16,17 @@
     });
 
     const addDateWithBTCValue = ( date, btcValue ) => {
-        const tr = document.getElementsByClassName('grid__block__table__row')[0].cloneNode(true);
+        const existentRow = document.getElementsByClassName('grid__block__table__row')[0];
+        const tr = existentRow.cloneNode(true);
         tr.children[0].textContent = date;
         tr.children[2].textContent = utils.formatEuroCurrency(btcValue);
-        
+
+        existentRow.parentNode.insertBefore(tr, existentRow);
         if( initialState ) {
             tr.classList.remove('grid__block__table__row--blank');
             document.getElementsByClassName('grid__block__table__row grid__block__table__row--blank')[0].remove();
             initialState = false;
         }
-
-        document.getElementsByClassName('grid__block__table')[0].append(tr);
     };
 
     const showNoInformationWarning = () => {
@@ -66,6 +73,7 @@
             addDateWithBTCValue( nextLottoDraw, ( todayPrice / historicPrice ) * 100 );
             b.removeAttribute('disabled');
         }).catch( msg => {
+            console.log(msg);
             showNoInformationWarning();
             b.removeAttribute('disabled');
         });
@@ -144,15 +152,24 @@ function formatUtils() {
     const formatEuroCurrency = (numValue) => euroF.format(numValue);
 
     const formatStringDate = (date) => {
-        let d = date.getDate();
-        let m = date.getMonth() + 1;
-        let y = date.getFullYear();
-        let time = date.toLocaleTimeString('en-IE').slice(0,5);
+        const d = date.getDate();
+        const m = date.getMonth() + 1;
+        const y = date.getFullYear();
+        const time = date.toLocaleTimeString('en-IE').slice(0,5);
         return `${(d <= 9) ? '0' + d : d}-${(m <= 9) ? '0' + m : m}-${y} ${time}`
+    };
+
+    const formatInputDate = (date) => {
+        const d = date.getDate();
+        const m = date.getMonth() + 1;
+        const y = date.getFullYear();
+        const time = date.toLocaleTimeString('en-IE').slice(0,5);
+        return `${y}-${(m <= 9) ? '0' + m : m}-${(d <= 9) ? '0' + d : d}T${time}`
     }
 
     return {
         formatStringDate,
-        formatEuroCurrency
+        formatEuroCurrency,
+        formatInputDate
     };
 }

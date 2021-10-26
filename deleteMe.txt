@@ -1,7 +1,0 @@
-TODOS:
-- fluid y responsiveness [OK]
-- hover state
-- animation
-- disable button in loading [OK]
-- warning msge
-- fecha predeterminada -> ahora
